@@ -156,7 +156,7 @@ __Vectors_End
 __Vectors_Size  EQU     __Vectors_End - __Vectors
 
 __BOOT_VER      DCD     (VER_MAJOR << 0) + (VER_MINOR << 16) + (VER_PATCH << 24)  ; Version
-__APP_LOAD_ADD  DCD     0x02007000
+__APP_LOAD_ADD  DCD     0x0200A000
 __PATCH_ADD     DCD     0x020040f4 ;platform_patches
                 DCD     0xffffffff
                 DCD     0xffffffff

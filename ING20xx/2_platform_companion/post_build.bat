@@ -7,7 +7,7 @@ rem This script should be placed in %BASE_PATH%\%PLATFORM_DIR%
 rem =========================================================
 
 rem Project root directory (absolute path)
-set BASE_PATH=D:\Program Files\ING_SDK\boot_2\Secondary_Bootloader\ING20xx
+set BASE_PATH=D:\ING_GIT\Secondary_Bootloader\ING20xx
 
 rem Platform SDK directory name (contains scripts and generated)
 set PLATFORM_DIR=2_platform_companion

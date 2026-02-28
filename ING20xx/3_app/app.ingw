@@ -7,15 +7,15 @@
    }
   },
   "rom": {
-   "size": 9628,
-   "base": 33562624
+   "size": 9472,
+   "base": 33570816
   },
   "ram": {
-   "size": 18460,
+   "size": 18496,
    "base": 536870912
   },
   "app": {
-   "base": 33574912
+   "base": 33595392
   },
   "version": [
    20,3,67]
@@ -54,13 +54,13 @@
  "is_sdk_path_rel": true,
  "pb_gatt": true,
  "deep_sleep": true,
- "proj_dir": "D:\\Program Files\\ING_SDK\\boot_2\\app",
+ "proj_dir": "D:\\ING_GIT\\Secondary_Bootloader\\ING20xx\\3_app",
  "heap_size": 0,
  "power_saving": false,
  "secondary": false,
  "bundle": "rom",
- "app_rom_size": "241664",
- "app_rom_addr": "33574912",
+ "app_rom_size": "221184",
+ "app_rom_addr": "33595392",
  "family": "ing20",
  "vcode": true,
  "heap_override": false,
@@ -75,10 +75,10 @@
   "proxy": true
  },
  "keil": true,
- "cmsis": "D:\/Program Files\/ING_SDK\/wizard\/CMSIS",
+ "cmsis": "",
  "cube": false,
- "app_ram_size": 30688,
- "app_ram_addr": 536889376,
+ "app_ram_size": 30656,
+ "app_ram_addr": 536889408,
  "k5_cc_ver": "6",
  "use_irq_table": false,
  "printf_enable": true,

@@ -5,8 +5,8 @@ RTE/
 *.uvgui.*
 *.uvguix.*
 
-/.vscode
-/logs
+.vscode
+logs
 
 *.un~
 *.swp
