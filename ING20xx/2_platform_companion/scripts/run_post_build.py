@@ -79,8 +79,8 @@ Examples:
         sys.exit(1)
     
     if not os.path.exists(dest_path):
-        print('Creating destination directory: {}'.format(dest_path))
-        os.makedirs(dest_path)
+        print('Error: App_name directory not found: {}'.format(dest_path))
+        sys.exit(1)
     
     for item in os.listdir(source_path):
         src_item = os.path.join(source_path, item)
