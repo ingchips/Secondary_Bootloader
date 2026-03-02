@@ -110,6 +110,11 @@ int main(void)
     SYSCTRL_SelectFlashClk(SYSCTRL_CLK_PLL_DIV_5); // 76.8MHZ
     SYSCTRL_SelectHClk(SYSCTRL_CLK_PLL_DIV_3); //128MHZ
 
+    // 如果要使用中断，请修改 VTOR，执行完后，应修改回默认值0x00000000或重启
+	// __disable_irq();
+	// SCB->VTOR = 0x2002000;
+	// __enable_irq();
+
 //    SYSCTRL_DisableSlowRC();
 	
     const block_info_t *p = (const block_info_t *)(FLASH_BASE +
