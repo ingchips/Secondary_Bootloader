@@ -48,7 +48,7 @@ python ./scripts/run_post_build.py --address 0x200A000 --app_name 3_app --sdk_pa
 
 # 更新 SDK
 1. 确保 ING SDK 的版本是需要更新的版本；
-2. 替换掉 `3_app` 工程中的 `sdk` 目录，主要为 `sdk\bundles` 和 `sdk\src` 目录，如果 APP 应用中有修改过 SDK 的部分，请自行移植；
+2. 在 ING SDK 的安装目录下找到 `sdk` 文件夹，替换掉 `3_app` 工程中的 `sdk` 目录，主要为 `sdk\bundles` 和 `sdk\src` 目录，如果 APP 应用中有修改过 SDK 的部分，请自行移植；
 3. 在 ING Wizard 中选择 `Examples`，搜索到 `ING20 ROM Companion` 工程，右键工程 `Copy this Example -> Copy SDK to My Project`，将该工程 Copy 出来:
 ![alt text](./img/copy_companion工程.png)
 4. 将 Copy 出来的工程按照 [2_platform_companion 配置和编译](#title2)步骤进行配置，如果 `platform_companion` 应用中有修改过 的部分，请自行移植，然后替换掉源目录下的 `2_platform_companion` 工程，进行编译；
