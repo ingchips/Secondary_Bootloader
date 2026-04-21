@@ -175,7 +175,7 @@ int main(void)
 {
     SYSCTRL_ConfigPLLClk(5, 80, 1);
     SYSCTRL_EnablePLL(1);
-    SYSCTRL_SelectFlashClk(SYSCTRL_CLK_PLL_DIV_5); // 76.8MHZ
+    SYSCTRL_SelectFlashClk(SYSCTRL_CLK_PLL_DIV_5); // 76.8MHZ, When the voltage is lower than 2.7V, the flash operates at a frequency of less than 40 MHz.
     SYSCTRL_SelectHClk(SYSCTRL_CLK_PLL_DIV_3); // 128MHZ
 	
 	// 将 VTOR 指定到当前向量表下，执行完后，应修改回默认值 0x00000000 或重启

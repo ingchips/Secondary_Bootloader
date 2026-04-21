@@ -1,10 +1,10 @@
 #<SYMDEFS># ARM Linker, 5.03 [Build 76]: Last Updated: Thu Oct 17 00:00:00 2019
-0x02005b71 T adv_get_last_terminated_adv_set
-0x02005b7d T adv_patch_enable
-0x02005bb5 T adv_patch_set_addr
-0x02005bd9 T adv_patch_set_adv_data
-0x02005c01 T adv_patch_set_interval
-0x02005c19 T adv_patch_set_rsp_data
+0x02003b69 T adv_get_last_terminated_adv_set
+0x02003b75 T adv_patch_enable
+0x02003bad T adv_patch_set_addr
+0x02003bd1 T adv_patch_set_adv_data
+0x02003bf9 T adv_patch_set_interval
+0x02003c11 T adv_patch_set_rsp_data
 0x00006875 T att_dispatch_client_can_send_now
 0x0000687b T att_dispatch_client_request_can_send_now_event
 0x00006881 T att_dispatch_register_client
@@ -72,7 +72,7 @@
 0x00008c79 T gap_rmv_dev_from_periodic_list
 0x00008c89 T gap_rx_test_v2
 0x00008c99 T gap_rx_test_v3
-0x02005d4d T gap_set_adv_set_random_addr
+0x02003d6d T gap_set_adv_set_random_addr
 0x00008d09 T gap_set_callback_for_next_hci
 0x00008d29 T gap_set_connection_cte_request_enable
 0x00008d45 T gap_set_connection_cte_response_enable
@@ -84,12 +84,12 @@
 0x00008e79 T gap_set_connectionless_iq_sampling_enable
 0x00008ed5 T gap_set_data_length
 0x00008eed T gap_set_def_phy
-0x02005d63 T gap_set_ext_adv_data
-0x02005d81 T gap_set_ext_adv_enable
-0x02005dc7 T gap_set_ext_adv_para
+0x02003d83 T gap_set_ext_adv_data
+0x02003da1 T gap_set_ext_adv_enable
+0x02003de7 T gap_set_ext_adv_para
 0x00009045 T gap_set_ext_scan_enable
 0x0000905d T gap_set_ext_scan_para
-0x02005e09 T gap_set_ext_scan_response_data
+0x02003e29 T gap_set_ext_scan_response_data
 0x00009115 T gap_set_host_channel_classification
 0x00009125 T gap_set_periodic_adv_data
 0x00009195 T gap_set_periodic_adv_enable
@@ -138,10 +138,10 @@
 0x0000a2f5 T gatt_client_write_long_value_of_characteristic_with_offset
 0x0000a331 T gatt_client_write_value_of_characteristic
 0x0000a367 T gatt_client_write_value_of_characteristic_without_response
-0x02005e49 T hci_add_event_handler
+0x02003e69 T hci_add_event_handler
 0x0000c1a5 T hci_power_control
 0x0000c359 T hci_register_acl_packet_handler
-0x02005f21 T is_adv_set_advertising
+0x02003f41 T is_adv_set_advertising
 0x0000caa9 T kv_commit
 0x0000cb05 T kv_get
 0x0000cb11 T kv_init
@@ -182,7 +182,7 @@
 0x0000e6cd T ll_ackable_packet_run
 0x0000e785 T ll_ackable_packet_set_tx_data
 0x0000e7a1 T ll_adjust_conn_peer_tx_power
-0x02005f89 T ll_aes_encrypt
+0x02003fa9 T ll_aes_encrypt
 0x0000e81d T ll_allow_nonstandard_adv_type
 0x0000e891 T ll_burst_packet_check_each_rx_pdu
 0x0000e8ed T ll_burst_packet_config_enhanced
@@ -252,7 +252,7 @@
 0x0002500b T platform_calibrate_rt_clk
 0x000021ab T platform_call_on_stack
 0x0002500f T platform_cancel_us_timer
-0x02006105 T platform_config
+0x02004161 T platform_config
 0x00025155 T platform_create_us_timer
 0x00025169 T platform_delete_timer
 0x00025171 T platform_enable_irq
@@ -263,7 +263,7 @@
 0x000251f1 T platform_get_task_handle
 0x00025211 T platform_get_timer_counter
 0x00025215 T platform_get_us_time
-0x02005415 T platform_get_version
+0x02004179 T platform_get_version
 0x00025235 T platform_hrng
 0x0002523d T platform_install_isr_stack
 0x00025249 T platform_install_task_stack
@@ -274,10 +274,10 @@
 0x00025309 T platform_read_info
 0x00025339 T platform_read_persistent_reg
 0x00025359 T platform_reset
-0x0200611f T platform_rom_hotfix
-0x02006131 T platform_rom_hotfix_using_fpb
-0x02006161 T platform_rt_rc_auto_tune
-0x02006169 T platform_rt_rc_auto_tune2
+0x02004183 T platform_rom_hotfix
+0x02004195 T platform_rom_hotfix_using_fpb
+0x020041c5 T platform_rt_rc_auto_tune
+0x020041cd T platform_rt_rc_auto_tune2
 0x00025401 T platform_rt_rc_tune
 0x00025429 T platform_set_abs_timer
 0x0002542d T platform_set_evt_callback
@@ -288,7 +288,7 @@
 0x00025481 T platform_set_rf_init_data
 0x0002548d T platform_set_rf_power_mapping
 0x00025499 T platform_set_timer
-0x020061e5 T platform_shutdown
+0x02004249 T platform_shutdown
 0x000254a1 T platform_switch_app
 0x000254c5 T platform_trace_raw
 0x000254dd T platform_write_persistent_reg

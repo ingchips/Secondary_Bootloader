@@ -83,7 +83,7 @@ static void setup_adv(void)
 
 static void user_packet_handler(uint8_t packet_type, uint16_t channel, const uint8_t *packet, uint16_t size)
 {
-    static const bd_addr_t rand_addr = { 0xD3, 0xA6, 0xB6, 0x75, 0xA8, 0xEE };
+    static const bd_addr_t rand_addr = { 0xCA, 0x01, 0x00, 0x7E, 0xC1, 0xE8 };
     uint8_t event = hci_event_packet_get_type(packet);
     const btstack_user_msg_t *p_user_msg;
     if (packet_type != HCI_EVENT_PACKET) return;

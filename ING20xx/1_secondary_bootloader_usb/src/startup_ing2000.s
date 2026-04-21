@@ -183,7 +183,7 @@ Reset_Handler   PROC
 				IMPORT  check_blocks_and_update
 				IMPORT	__scatterload
 
-                ; 检查是否需要搬运固件的标志位，通常为接收固件完毕后，掉电重启
+                ; 检查是否需要搬运固件的标志位，通常为接收固件完毕后，重启进入到这里进行判断
 				LDR     R0, =0x02002000 - 12
 				LDR     R0, [R0]
 				LDR     R1, =0x5A5A5A5A
@@ -193,14 +193,14 @@ Reset_Handler   PROC
                 ; 检查之前是否进入过当前 boot 的标志位，进入当前 boot 过后，掉电重启一般到这里，直接跳过进入 APP
 				LDR     R0, =0x02002000 - 16
 				LDR     R0, [R0]
-;				LDR     R1, =0x5A5A5A5A
+				; LDR     R1, =0x5A5A5A5A
 				CMP     R0, R1
 				BEQ		START_APP
 
                 ; 检查是否需要进入当前 boot 程序，该标志位由应用层来决定
 				LDR     R0, =0x02002000 - 20
 				LDR     R0, [R0]
-;				LDR     R1, =0x5A5A5A5A
+				; LDR     R1, =0x5A5A5A5A
 				CMP     R0, R1
 				BEQ		START_BOOT
 				

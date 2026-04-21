@@ -2,8 +2,10 @@
 #include <stdint.h>
 #include <string.h>
 #include "eflash.h"
+#include "ingsoc.h"
 
 #define DEF_UPDATE_FLAG     0x5A5A5A5A
+// #define __PLATFORM_ADDR    0x02004000
 
 typedef struct block_info
 {
@@ -13,8 +15,6 @@ typedef struct block_info
     uint32_t magic;
 } block_info_t;
 
-# define __PLATFORM_ADDR    0x02004000
-
 typedef struct boot_ver_s
 {
     unsigned short major;
@@ -22,53 +22,29 @@ typedef struct boot_ver_s
     char  patch;
 } boot_ver_t;
 
-const boot_ver_t *boot_get_version(void)
-{
-    extern uint32_t __BOOT_VER;
-    return (const boot_ver_t *)&__BOOT_VER;
-}
+// const boot_ver_t *boot_get_version(void)
+// {
+//     extern uint32_t __BOOT_VER;
+//     return (const boot_ver_t *)&__BOOT_VER;
+// }
 
-//static void set_reg_bit(volatile uint32_t *reg, uint8_t v, uint8_t bit_offset)
-//{
-//    if (v)
-//        *reg |= 1 << bit_offset;
-//    else
-//        *reg &= ~(1 << bit_offset);
-//}
+// // Jump to application at specified address [keil compiler version 5]
+// void jump_to_app(uint32_t app_addr)
+// {
+//     typedef void (*pFunction)(void);
+//     uint32_t jumpAddress;
+//     pFunction JumpToApplication;
 
-//static void SYSCTRL_DisableSlowRC(void)
-//{
-//    #define AON1_PMU3       ((volatile uint32_t *)(AON1_CTRL_BASE + 0x3c))
+//     // Get the application stack pointer (first 4 bytes at app_addr)
+//     __set_MSP(*(volatile uint32_t *)app_addr);
 
-//    set_reg_bit(AON1_PMU3, 0, 19);
-//}
+//     // Get the application entry point (second 4 bytes at app_addr + 4)
+//     jumpAddress = *(volatile uint32_t *)(app_addr + 4);
+//     JumpToApplication = (pFunction)jumpAddress;
 
-/* Note: If 24M OSC is used as source of slow clock, then
- * this simplified `SYSCTRL_GetSlowClk` can be used:
- *
- * uint32_t SYSCTRL_GetSlowClk(void)
- * {
- *     return OSC_CLK_FREQ;
- * }
- */
-
-// Jump to application at specified address [keil compiler version 5]
-void jump_to_app(uint32_t app_addr)
-{
-    typedef void (*pFunction)(void);
-    uint32_t jumpAddress;
-    pFunction JumpToApplication;
-
-    // Get the application stack pointer (first 4 bytes at app_addr)
-    __set_MSP(*(volatile uint32_t *)app_addr);
-
-    // Get the application entry point (second 4 bytes at app_addr + 4)
-    jumpAddress = *(volatile uint32_t *)(app_addr + 4);
-    JumpToApplication = (pFunction)jumpAddress;
-
-    // Jump to application
-    JumpToApplication();
-}
+//     // Jump to application
+//     JumpToApplication();
+// }
 
 // 把数据从 Flash 拷贝到 Flash 的辅助函数：逐扇区读入内存再写入
 static int flash_to_flash(uint32_t src, uint32_t dst, uint8_t *buffer, uint32_t size)
@@ -105,41 +81,36 @@ static int check_fota_blocks(const block_info_t *p)
 
 int main(void)
 {
-    SYSCTRL_ConfigPLLClk(5, 80, 1);
-    SYSCTRL_EnablePLL(1);
-    SYSCTRL_SelectFlashClk(SYSCTRL_CLK_PLL_DIV_5); // 76.8MHZ
-    SYSCTRL_SelectHClk(SYSCTRL_CLK_PLL_DIV_3); //128MHZ
+    // 修改频率提高运行速度
+    // SYSCTRL_ConfigPLLClk(5, 80, 1);
+    // SYSCTRL_EnablePLL(1);
+    // SYSCTRL_SelectFlashClk(SYSCTRL_CLK_PLL_DIV_5); // 76.8MHZ, When the voltage is lower than 2.7V, the flash operates at a frequency of less than 40 MHz.
+    // SYSCTRL_SelectHClk(SYSCTRL_CLK_PLL_DIV_3); // 128MHZ
 
     // 如果要使用中断，请修改 VTOR，执行完后，应修改回默认值0x00000000或重启
 	// __disable_irq();
 	// SCB->VTOR = 0x2002000;
 	// __enable_irq();
 
-//    SYSCTRL_DisableSlowRC();
-	
+	uint8_t buff[EFLASH_ERASABLE_SIZE];
     const block_info_t *p = (const block_info_t *)(FLASH_BASE +
         EFLASH_SECTOR_SIZE * 2 - sizeof(block_info_t));
-	if(p->magic == DEF_UPDATE_FLAG)
-	{
-		if (check_fota_blocks(p) == 0)
-		{
-			// 检查通过，逐项拷贝
-			while (p->magic == DEF_UPDATE_FLAG)
-			{
-				// 注意：内存直接使用，不定义变量
-				flash_to_flash(p->src, p->dst, (void *)0x20002000, p->size);
-				p--;
-			}
-			// 擦除元信息
-			// 只有在这个动作执行期间电源失效，才有可能导致固件损坏
-			erase_flash_sector(FLASH_BASE + EFLASH_SECTOR_SIZE);
+    if (check_fota_blocks(p) == 0)
+    {
+        // 检查通过，逐项拷贝
+        while (p->magic == DEF_UPDATE_FLAG)
+        {
+            // 注意：内存直接使用，不定义变量
+            flash_to_flash(p->src, p->dst, buff, p->size);
+            p--;
+        }
+        // 擦除元信息
+        // 只有在这个动作执行期间电源失效，才有可能导致固件损坏
+        erase_flash_sector(FLASH_BASE + EFLASH_SECTOR_SIZE);
 
-			// 重启
-			NVIC_SystemReset();
-		}
-	}
+    }
 
-    jump_to_app(__PLATFORM_ADDR);
+    SYSCTRL_Reset(); // 重启
 
     return 0;
 }

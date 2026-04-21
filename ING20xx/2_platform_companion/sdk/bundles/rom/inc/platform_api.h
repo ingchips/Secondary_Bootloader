@@ -17,6 +17,7 @@
 #include <stdint.h>
 #include "ingsoc.h"
 #include "ll_api.h"
+#include "platform_def.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -387,8 +388,9 @@ void platform_switch_app(const uint32_t app_addr);
  * @brief Write value to the persistent register, of which the value is kept even
  *        in power saving mode.
  *
- * For ING918: the least FOUR significant bits of `value` are saved;
- * For ING916: the least FIVE significant bits of `value` are saved.
+ * For ING918: the least FOUR  significant bits of `value` are saved;
+ * For ING916: the least FIVE  significant bits of `value` are saved.
+ * For ING20 : the least THREE significant bits of `value` are saved.
  *
  * @param[in] value              value
  ****************************************************************************************
@@ -968,8 +970,6 @@ typedef void (*f_platform_function)(void *user_data);
  */
 void platform_call_on_stack(f_platform_function f, void *user_data,
                             void *stack_start, uint32_t stack_size);
-
-#define PLATFORM_IN_ROM     1
 
 /**
  *****************************************************************************************

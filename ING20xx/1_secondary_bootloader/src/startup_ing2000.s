@@ -182,42 +182,20 @@ Reset_Handler   PROC
                 EXPORT  Reset_Handler
                 IMPORT  __scatterload
 
-                LDR     R0, =0x40000008
-                LDR     R1, [R0]
-                ORR     R1, R1, #0x2
-                STR     R1, [R0]
-
-                LDR     R0, =0x4000001c
-                LDR     R1, [R0]
-                ORR     R1, R1, #0x400
-                STR     R1, [R0]
-
-POWER_CS_START_READ
-                LDR      r3, =0x40100000
-                MOVS     r1,#0x01
-                LDR      r0,[r3,#0x54]
-                UBFX     r0,r0,#12,#4
-POWER_CS_READ_AGAIN
-                LDR      r2,[r3,#0x54]
-                UBFX     r2,r2,#12,#4
-                CMP      r0,r2
-                BNE      POWER_CS_START_READ
-                ADDS     r1,r1,#1
-                CMP      r1,#0x03
-                BLT      POWER_CS_READ_AGAIN
-                CMP      r0,#0x02
-                BLT      POWER_CS_START_READ
-
-                LDR     r3, =0x40110000
-                LDR     r0, [r3]
-                CMP     r0, #0
-                BEQ     POWER_CS_START_READ
-
-                LDR     r3, =0x40000044
-                LDR     r0, [r3]
-                ORR     r0, r0, #0x10000; (1ul << 16)
-                STR     r0, [r3]
-
+                ; 检查是否需要搬运固件的标志位，通常为接收固件完毕后，重启进入到这里进行判断
+				LDR     R0, =0x02002000 - 4
+				LDR     R0, [R0]
+				LDR     R1, =0x5A5A5A5A
+				CMP     R0, R1
+				BEQ		START_BOOT
+START_APP
+                ; 正常启动
+				LDR     R0, =0x02004000  ; __PLATFORM_ADDR 
+				LDR		R1, [R0, #0x0]
+				MSR     MSP, R1
+				LDR		R1, [R0, #0x4]
+				BX		R1
+START_BOOT
                 LDR     R0, =__scatterload
                 BX      R0
 

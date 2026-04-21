@@ -51,7 +51,7 @@ Examples:
     gen_files_tool_name = 'gen_files.nim'
     gen_files_tool_cmd = 'gen_files'
     source_dir = 'generated'
-    dest_subdir = 'sdk\\bundles\\rom\\ING20xx'
+    dest_subdir = 'sdk\\bundles\\rom\\ING208xx'
     
     script_path = script_dir
     source_path = os.path.join(platform_companion_dir, source_dir)
