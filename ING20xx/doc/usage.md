@@ -2,6 +2,15 @@
 ## 1_secondary_bootloader 配置和编译
 1. 编辑 `startup_ing2000.s` 内 `__APP_LOAD_ADD` 和 `__PATCH_ADD` 的地址，`__APP_LOAD_ADD` 为 APP 的起始地址，`__PATCH_ADD` 为 platform 首地址到实际 patch 的偏移值，可通过编译 `2_platform_companion` 获得。
 ![alt text](./img/二级Boot启动文件设置.png)
+
+2. 修改 `After Build/Rebuild` 的 `Run #2`执行的命令：
+
+![alt text](./img/companion_after_build.png)
+
+**命令：**
+```shell
+python ./scripts/run_post_build.py --address 0x200A000 --app_name 3_app --sdk_path "D:\Program Files\ING_SDK"
+```
 2. 直接通过 Keil 进行编译。
 3. 将编译好的 `secondary_bootloader.bin` Copy 到 `3_app\secondary_bootloader` 目录下。
 
