@@ -8,9 +8,9 @@
 
 typedef struct block_info
 {
-    uint32_t size;
-    uint32_t dst;
-    uint32_t src;
+    uint32_t size;                   // block size
+    uint32_t dst;                    // block destination address
+    uint32_t src;                    // block source address
 } block_info_t;
 
 typedef struct 
