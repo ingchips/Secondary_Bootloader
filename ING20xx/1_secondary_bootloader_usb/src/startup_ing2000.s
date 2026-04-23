@@ -29,7 +29,7 @@ VER_MAJOR   EQU  1
 VER_MINOR   EQU  1
 VER_PATCH   EQU  1
 
-Stack_Size      EQU     0x00000200
+Stack_Size      EQU     0x00001000
 
                 AREA    STACK, NOINIT, READWRITE, ALIGN=3
 Stack_Mem       SPACE   Stack_Size

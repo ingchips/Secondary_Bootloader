@@ -7,6 +7,8 @@
 #include "interface.h"
 #include "rom_tools.h"
 
+static uint8_t buff[EFLASH_ERASABLE_SIZE];
+
 typedef struct boot_ver_s
 {
     unsigned short major;
@@ -84,23 +86,23 @@ void setup_peripherals(void)
  */
 
 #define __PLATFORM_ADDR    0x02008000
-// Jump to application at specified address [keil compiler version 5]
-void jump_to_app(uint32_t app_addr)
-{
-    typedef void (*pFunction)(void);
-    uint32_t jumpAddress;
-    pFunction JumpToApplication;
+//// Jump to application at specified address [keil compiler version 5]
+//void jump_to_app(uint32_t app_addr)
+//{
+//    typedef void (*pFunction)(void);
+//    uint32_t jumpAddress;
+//    pFunction JumpToApplication;
 
-    // Get the application stack pointer (first 4 bytes at app_addr)
-    __set_MSP(*(volatile uint32_t *)app_addr);
+//    // Get the application stack pointer (first 4 bytes at app_addr)
+//    __set_MSP(*(volatile uint32_t *)app_addr);
 
-    // Get the application entry point (second 4 bytes at app_addr + 4)
-    jumpAddress = *(volatile uint32_t *)(app_addr + 4);
-    JumpToApplication = (pFunction)jumpAddress;
+//    // Get the application entry point (second 4 bytes at app_addr + 4)
+//    jumpAddress = *(volatile uint32_t *)(app_addr + 4);
+//    JumpToApplication = (pFunction)jumpAddress;
 
-    // Jump to application
-    JumpToApplication();
-}
+//    // Jump to application
+//    JumpToApplication();
+//}
 
 // 把数据从 Flash 拷贝到 Flash 的辅助函数：逐扇区读入内存再写入
 static int flash_to_flash(uint32_t src, uint32_t dst, uint8_t *buffer, uint32_t size)
@@ -127,7 +129,6 @@ void check_blocks_and_update(void)
 #if (DEBUG_PRINTF == 1)
 	setup_peripherals();
 #endif
-	uint8_t buff[EFLASH_ERASABLE_SIZE];
     const boot_settings_t *boot_settings = (const boot_settings_t *)(0x2002000 - sizeof(boot_settings_t));
 	
     const block_info_t *block_info = (const block_info_t *)((uint32_t)boot_settings - sizeof(block_info_t));

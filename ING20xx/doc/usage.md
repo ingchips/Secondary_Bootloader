@@ -5,7 +5,7 @@
 ![alt text](./img/二级Boot启动文件设置.png)
 
 2. 直接通过 Keil 进行编译。
-3. keil 会执行 `scripts\copy.bat` 脚本，将编译好的 `secondary_bootloader.bin` Copy 到 `3_app\secondary_bootloader` 目录下。
+3. keil 会执行 `scripts\copy.bat` 脚本，将编译好的 `secondary_bootloader.bin` Copy 到 `3_app` 目录下。
 
 ---
 
@@ -38,8 +38,8 @@ python ./scripts/run_post_build.py --address 0x200E000 --app_name 3_app --sdk_pa
 |参数  | 描述                              |
 |:--------------------|:-----------------------------------------|
 |--address      | APP 的 Flash 起始地址，与 `__APP_LOAD_ADD` 一致 |
-|--app_name     | APP 工程的目录名称，要求与当前工程放到一个目录下  |
-|--sdk_path     | ING SDK 的安装目录，用于获取 generate 等工具     |
+|--app_name     | APP 工程的目录名称，要求与当前工程放到一个目录下，编译完成后会把生成的文件 copy 到应用工程的 SDK 中  |
+|--sdk_path     | ING SDK 的安装目录，用于获取 generate 等工具，来转化编译的 bin 和生成符号文件     |
 
 3. 直接通过 Keil 进行编译，获取 `__PATCH_ADD`，编译完成后会自动 Copy `SDK\bundles\ING20xx` 目录下的文件到 `3_app` 工程相应目录下。
 ![alt text](./img/addr.png)

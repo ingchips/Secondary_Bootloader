@@ -7,6 +7,8 @@
 #define DEF_UPDATE_FLAG     0x5A5A5A5A
 // #define __PLATFORM_ADDR    0x02004000
 
+static 	uint8_t buff[EFLASH_ERASABLE_SIZE];
+
 typedef struct block_info
 {
     uint32_t size;
@@ -92,7 +94,6 @@ int main(void)
 	// SCB->VTOR = 0x2002000;
 	// __enable_irq();
 
-	uint8_t buff[EFLASH_ERASABLE_SIZE];
     const block_info_t *p = (const block_info_t *)(FLASH_BASE +
         EFLASH_SECTOR_SIZE * 2 - sizeof(block_info_t));
     if (check_fota_blocks(p) == 0)
