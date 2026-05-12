@@ -4,7 +4,8 @@
 #include "bsp_usb_hid_iap.h"
 #include "interface.h"
 
-#if (DEBUG_PRINTF == 1)
+#define USB_DEBUG_EN 0
+#if (DEBUG_PRINTF == 1 && USB_DEBUG_EN == 1)
 #define USB_DEBUG(...)	printf(__VA_ARGS__)
 #else
 #define USB_DEBUG(...)      

@@ -46,6 +46,7 @@ void wdt_reset(void)
 // app 与 usb boot 使用同一片内存，防止跳转后变量所在的内存被 app 赋值
 void app_timer_init(void)
 {
+	SYSCTRL_ClearClkGateMulti(1 << SYSCTRL_ClkGate_APB_TMR1);
     app_timer_flag = 0;
     timer_callback = NULL;
 	quite_loop_flag = 0;

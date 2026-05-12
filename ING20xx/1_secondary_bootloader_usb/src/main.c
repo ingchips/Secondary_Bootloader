@@ -62,7 +62,7 @@ void config_uart(uint32_t freq, uint32_t baud)
 
 void setup_peripherals(void)
 {
-    SYSCTRL_ClearClkGateMulti(1 << SYSCTRL_ClkGate_APB_UART0 | 1 << SYSCTRL_ClkGate_APB_TMR1);
+    SYSCTRL_ClearClkGateMulti(1 << SYSCTRL_ClkGate_APB_UART0);
     config_uart(OSC_CLK_FREQ, 460800);
 }
 
